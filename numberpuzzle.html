@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Number Puzzle</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel = "stylesheet" href = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#puzzle").each(function () {
+                var divs = $(this).find("div");
+                for (var i = 0; i < divs.length; i++) {
+                    $(divs[i]).remove();
+                }
+                var i = divs.length;
+
+                if ( i == 0 ) {
+                    return false;
+                }
+                while (i--) {
+                    var j = Math.floor( Math.random() * ( i + 1 ) );
+                    var tempi = divs[i];
+                    var tempj = divs[j];
+                    divs[i] = tempj;
+                    divs[j] = tempi;
+                }
+                for(var i = 0; i < divs.length; i++) {
+                    $(divs[i]).appendTo(this);  
+                }              
+            });
+
+            $("#puzzle").sortable();
+        });
+    </script>
+    <style>
+        #wrapper {
+            width: 700px;
+            height: 500px;
+            margin: auto;
+        }
+        h1 {
+            margin-left: 8%;
+        }
+        .number {
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            background: lightblue;
+            color: black;
+            position: relative;
+            float: left;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id = "wrapper">
+        <div id = "puzzle">
+            <h1>Drag the numbers inside the boxes and sort them in order! </h1>
+            <div class = "number" id = "5">5</div>
+            <div class = "number" id = "10">10</div>
+            <div class = "number" id = "7">7</div>
+            <div class=  "number" id = "3">3</div>
+            <div class = "number" id = "1">1</div>
+            <div class = "number" id = "9">9</div>
+            <div class = "number" id = "4">4</div>
+            <div class = "number" id = "2">2</div>
+            <div class = "number" id = "8">8</div>
+            <div class = "number" id = "6">6</div>
+        </div>
+    </div>
+</body>
+</html>

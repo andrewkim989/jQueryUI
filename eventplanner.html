@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Event Planner</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel = "stylesheet" href = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(function() {
+            $(".datepicker").datepicker();
+        });
+
+        function validate() {
+            var nameerror, dateerror, timeerror, descerror;
+            var name = document.getElementById("name").value;
+            var date = document.getElementById("date").value;
+            var time = document.getElementById("time").value;
+            var desc = document.getElementById("description").value;
+
+            $("span").html("");
+
+            if (name.length < 2) {
+                nameerror = "Name must be at least 2 characters long";
+                document.getElementById("nameerror").innerHTML = nameerror;
+            }
+            if (date.length < 1) {
+                dateerror = "Please choose a date to schedule the event";
+                document.getElementById("dateerror").innerHTML = dateerror;
+            }
+            if (time < 1) {
+                timeerror = "Number must be greater than 0";
+                document.getElementById("timeerror").innerHTML = timeerror;
+            }
+            if (desc.length < 10) {
+                descerror = "Description must be more than 10 characters long";
+                document.getElementById("descerror").innerHTML = descerror;
+            }
+            if ($("span").text().length == 0) {
+                $("#eventform").hide();
+                document.getElementById("eventsubmit").innerHTML = 
+                    "<h2>Thank you for scheduling an event! </h2>" + 
+                    "<h2>Here's what you have submitted: </h2>" +
+                    "<p><b>Your name:</b> " + name + "</p>" + 
+                    "<p><b>Date of the event:</b> " + date + "</p>" + 
+                    "<p><b>Length of the event:</b> " + time + " hours</p>" + 
+                    "<p><b>Descripton of the event:</b></p><p>" + desc + "</p><br/>" +
+                    "<button onclick = 'back()'>Click here to go back</button>"
+                $("#eventsubmit").show();
+            }
+        }
+
+        function back() {
+            $("#eventsubmit").hide();
+            $("#eventform").show();
+        }
+    </script>
+    <style>
+        #eventform {
+            margin-left: 25%;
+            margin-top: 50px;
+            width: 700px;
+        }
+        input {
+            font-size: 16px;
+        }
+        span {
+            color: rgb(221, 70, 70);
+        }
+        #eventsubmit {
+            display: none;
+            margin-top: 50px;
+            margin-left: 35%;
+        }
+    </style>
+</head>
+<body>
+    <div id = "wrapper">
+        <div id = "eventform">
+            <h2>Do you have event planned for you and other people you know? 
+            Then submit your info here! </h2>
+            Your name: <input type = "text" id = "name"/>
+            <span id = "nameerror"></span>
+            <br/><br/>
+            Date: <input type = "text" class = "datepicker" id = "date"/>
+            <span id = "dateerror"></span>
+            <br/><br/>
+            Hours: <input type = "number" id = "time"/>
+            <span id = "timeerror"></span>
+            <br/><br/>
+            Descripton of the event: <span id = "descerror"></span><br/>
+            <textarea id = "description" rows = "5" cols = "45"></textarea>
+            <br/><br/>
+            <button onclick = "validate()">Add to calender</button>
+        </div>
+        <div id = "eventsubmit"></div>
+    </div>
+</body>
+</html>
